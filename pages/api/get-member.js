@@ -16,8 +16,8 @@ const handler = async (_, res) => {
       updated_at: 'desc',
     });
 
-    const mergedResult = resultsMysql.map((item, idx) =>
-      Object.assign({}, item, resultsMongodb[idx]._doc)
+    const mergedResult = resultsMongodb.map((item, idx) =>
+      Object.assign({}, item._doc, resultsMysql[idx])
     );
 
     const sortResult = mergedResult.sort((a, b) => {
@@ -25,8 +25,6 @@ const handler = async (_, res) => {
       if (a.name > b.name) return 1;
       return 0;
     });
-
-    console.log(sortResult);
 
     return res.json(sortResult);
   } catch (e) {

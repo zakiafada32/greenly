@@ -14,6 +14,6 @@ export function useMember() {
   };
 }
 
-export function useEntry(id) {
-  return useSWR(`/api/get-entry?id=${id}`, fetcher);
+export function useEntry(id, member_id) {
+  return useSWR(`/api/get-entry?id=${id}$member_id=${member_id}`, fetcher);
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { mutate } from 'swr';
 
-export default function EntryForm() {
+export default function Form() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');

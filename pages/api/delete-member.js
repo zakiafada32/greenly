@@ -1,22 +1,29 @@
 import { query } from '../../utils/mysql';
+import dbConnect from '../../utils/mongodb';
+import MemberMongodb from '../../models/MemberMongodb';
 
 const handler = async (req, res) => {
-  const { id } = req.query;
+  const { id, memberId } = req.query;
+
   try {
-    if (!id) {
-      return res.status(400).json({ message: '`id` required' });
+    if (!id || !memberId) {
+      return res.status(400).json({ message: '`id` and `memberId` required' });
     }
-    if (typeof parseInt(id.toString()) !== 'number') {
-      return res.status(400).json({ message: '`id` must be a number' });
-    }
-    const results = await query(
+
+    // delete data mysql
+    const resultsMysql = await query(
       `
-      DELETE FROM entries
+      DELETE FROM member
       WHERE id = ?
   `,
-      id
+      parseInt(id, 10)
     );
-    res.json(results);
+
+    // delete data mongodb
+    await dbConnect();
+    const resultsMongodb = await MemberMongodb.deleteOne({ _id: memberId });
+
+    res.json(resultsMysql, resultsMongodb);
   } catch (e) {
     res.status(500).json({ message: e.message });
   }
