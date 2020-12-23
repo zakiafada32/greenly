@@ -11,10 +11,6 @@ export default function Home() {
 
   console.log(member);
 
-  if (isLoading) {
-    return <div>loading</div>;
-  }
-
   return (
     <div className={styles.container}>
       <Head>
@@ -24,7 +20,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <Form />
-        <List member={member} />
+        {isLoading ? <div>loading</div> : <List member={member} />}
       </main>
 
       <footer className={styles.footer}>zaki</footer>

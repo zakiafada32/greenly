@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 import { query } from '../../utils/mysql';
 import dbConnect from '../../utils/mongodb';
 import MemberMongodb from '../../models/MemberMongodb';
-import { dateIso } from '../../utils/date-format';
 
 const handler = async (req, res) => {
   const { name, phone, address } = req.body;
@@ -25,9 +24,9 @@ const handler = async (req, res) => {
     // add data mongodb
     await dbConnect();
     const resultsMongodb = await MemberMongodb.create({
-      _id: _id,
-      phone: phone,
-      address: address,
+      _id,
+      phone,
+      address,
       created_at: new Date(),
       updated_at: new Date(),
     });

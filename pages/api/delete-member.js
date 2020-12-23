@@ -3,11 +3,11 @@ import dbConnect from '../../utils/mongodb';
 import MemberMongodb from '../../models/MemberMongodb';
 
 const handler = async (req, res) => {
-  const { id, memberId } = req.query;
+  const { id, member_id } = req.query;
 
   try {
-    if (!id || !memberId) {
-      return res.status(400).json({ message: '`id` and `memberId` required' });
+    if (!id || !member_id) {
+      return res.status(400).json({ message: '`id` and `member_id` required' });
     }
 
     // delete data mysql
@@ -21,7 +21,7 @@ const handler = async (req, res) => {
 
     // delete data mongodb
     await dbConnect();
-    const resultsMongodb = await MemberMongodb.deleteOne({ _id: memberId });
+    const resultsMongodb = await MemberMongodb.deleteOne({ _id: member_id });
 
     res.json(resultsMysql, resultsMongodb);
   } catch (e) {

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { mutate } from 'swr';
 
-import EditModal from './EditModal';
+import Edit from './Edit';
 import { formatDate } from '../utils/date-format';
 
 export default function Card({ data }) {
@@ -11,7 +11,7 @@ export default function Card({ data }) {
   async function deleteMember() {
     setDeleting(true);
     let res = await fetch(
-      `/api/delete-member?id=${data.id}&memberId=${data.member_id}`,
+      `/api/delete-member?id=${data.id}&member_id=${data.member_id}`,
       {
         method: 'DELETE',
       }
@@ -28,7 +28,7 @@ export default function Card({ data }) {
 
   return (
     <>
-      <EditModal modalOpen={modalOpen} toggleModal={toggleModal} data={data} />
+      <Edit modalOpen={modalOpen} toggleModal={toggleModal} data={data} />
       <div>name: {data.name}</div>
       <div>phone: {data.phone}</div>
       <div>address: {data.address}</div>

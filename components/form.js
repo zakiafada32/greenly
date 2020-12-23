@@ -1,33 +1,61 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { mutate } from 'swr';
 
-export default function Form() {
+export default function Form({ data }) {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
+  useEffect(() => {
+    if (data) {
+      setName(data.name);
+      setPhone(data.phone);
+      setAddress(data.address);
+    }
+  }, []);
+
   async function submitHandler(e) {
-    setSubmitting(true);
     e.preventDefault();
+    setSubmitting(true);
     try {
-      const res = await fetch('/api/create-member', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name,
-          phone,
-          address,
-        }),
-      });
+      if (!data) {
+        // add member
+        const res = await fetch('/api/create-member', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name,
+            phone,
+            address,
+          }),
+        });
+        const json = await res.json();
+        if (!res.ok) throw Error(json.message);
+      } else {
+        // edit member
+        console.log('edit');
+        const res = await fetch('/api/edit-member', {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            id: data.id,
+            member_id: data.member_id,
+            name: name,
+            phone: phone,
+            address: address,
+          }),
+        });
+        const json = await res.json();
+        if (!res.ok) throw Error(json.message);
+      }
 
       setSubmitting(false);
-      const json = await res.json();
-      if (!res.ok) throw Error(json.message);
       mutate('/api/get-member');
-
       setName('');
       setPhone('');
       setAddress('');

@@ -12,7 +12,7 @@ export default function EditModal({ modalOpen, toggleModal, data }) {
         contentLabel="Edit modal"
         onRequestClose={toggleModal}
       >
-        <Form />
+        <Form data={data}>Edit Member</Form>
         <div>name: {data.name}</div>
         <div>phone: {data.phone}</div>
         <div>address: {data.address}</div>
