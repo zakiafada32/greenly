@@ -13,9 +13,10 @@ const handler = async (_, res) => {
     // get data mongodb
     await dbConnect();
     const resultsMongodb = await MemberMongodb.find({}).sort({
-      updated_at: 'desc',
+      updated_at: -1,
     });
 
+    // merged data mysql and mongodb
     const mergedResult = resultsMysql.map((item, idx) =>
       Object.assign({}, item, resultsMongodb[idx]._doc)
     );

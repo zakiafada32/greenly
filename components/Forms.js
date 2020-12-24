@@ -89,7 +89,7 @@ export default function Form({ data, toggleModal }) {
           className="form-input"
           id="phone"
           type="tel"
-          pattern="\d*"
+          pattern="[0-9]*"
           name="phone"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
