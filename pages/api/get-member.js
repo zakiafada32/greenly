@@ -26,7 +26,7 @@ const handler = async (_, res) => {
       return 0;
     });
 
-    return res.json(sortResult);
+    return res.status(200).json(sortResult);
   } catch (e) {
     res.status(500).json({ message: e.message });
   }

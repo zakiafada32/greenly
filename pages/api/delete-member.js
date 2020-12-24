@@ -23,7 +23,7 @@ const handler = async (req, res) => {
     await dbConnect();
     const resultsMongodb = await MemberMongodb.deleteOne({ _id: member_id });
 
-    res.json(resultsMysql, resultsMongodb);
+    res.status(200).json(resultsMysql, resultsMongodb);
   } catch (e) {
     res.status(500).json({ message: e.message });
   }

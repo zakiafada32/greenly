@@ -31,7 +31,7 @@ const handler = async (req, res) => {
       updated_at: new Date(),
     });
 
-    return res.json({ resultsMysql, resultsMongodb });
+    return res.status(201).json({ resultsMysql, resultsMongodb });
   } catch (e) {
     res.status(500).json({ message: e.message });
   }
