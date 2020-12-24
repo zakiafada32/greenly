@@ -10,6 +10,13 @@ export const formatDate = (d) => {
   const local = new Date(d);
   const [day, month, year] = local.toLocaleString().split(', ')[0].split('/');
   const date = `${day}-${month}-${year}`;
+  return `${date}`;
+};
+
+export const formatDateTime = (d) => {
+  const local = new Date(d);
+  const [day, month, year] = local.toLocaleString().split(', ')[0].split('/');
+  const date = `${day}-${month}-${year}`;
   const time = local
     .toTimeString()
     .split(' ')[0]

@@ -1,0 +1,62 @@
+@mixin dots($color) {
+  background: radial-gradient($color 20%, transparent 19%),
+    radial-gradient($color 20%, transparent 19%), transparent;
+  background-size: 6px 6px;
+  background-position: 0 0, 3px 3px;
+}
+
+.card-container {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  display: grid;
+  height: auto;
+  min-height: 220px;
+  margin: 10px auto;
+  width: 350px;
+}
+
+.card {
+  grid-template-columns: repeat(24, 1fr);
+  grid-template-rows: repeat(24, 1fr);
+
+  &-green {
+    background-color: #1e4f49;
+    grid-column: 1 / span 23;
+    grid-row: 1 / span 7;
+  }
+
+  &-dots {
+    @include dots(#a9cf37);
+    grid-column: 23 / span 24;
+    grid-row: 3 / span 20;
+  }
+
+  &-name {
+    grid-column: 2 / span 21;
+    grid-row: 3 / span 24;
+    color: white;
+    margin-bottom: 45px;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  &-personal-info {
+    grid-column: 2 / span 21;
+    grid-row: 8 / span 24;
+    p {
+      grid-row: 5 / span 7;
+      font-size: 15px;
+      line-height: 20px;
+      span {
+        font-weight: bold;
+        display: inline-block;
+        width: 100px;
+      }
+    }
+    .button-container {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}

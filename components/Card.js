@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { mutate } from 'swr';
 
 import Edit from './Edit';
+import Button from './Button';
+
 import { formatDate } from '../utils/date-format';
 
 export default function Card({ data }) {
@@ -27,17 +29,35 @@ export default function Card({ data }) {
   };
 
   return (
-    <>
+    <div className="cell">
       <Edit modalOpen={modalOpen} toggleModal={toggleModal} data={data} />
-      <div>name: {data.name}</div>
-      <div>phone: {data.phone}</div>
-      <div>address: {data.address}</div>
-      <div>joined since: {formatDate(data.created_at)}</div>
-      <div>last updated:{formatDate(data.updated_at)}</div>
-      <button onClick={toggleModal}>edit member</button>
-      <button onClick={deleteMember}>
-        {deleting ? 'Deleting Member...' : 'Delete Member'}
-      </button>
-    </>
+      <div className="card-container card">
+        <div className="card-green"></div>
+        <div className="card-dots"></div>
+        <div className="card-name">{data.name}</div>
+        <div className="card-personal-info">
+          <p>
+            <span>Phone</span>: {data.phone}
+          </p>
+          <p>
+            <span>Address</span>: {data.address}
+          </p>
+          <p>
+            <span>Joined Since</span>: {formatDate(data.created_at)}
+          </p>
+          <p>
+            <span>Last Updated</span>: {formatDate(data.updated_at)}
+          </p>
+          <div className="button-container">
+            <Button onClick={toggleModal} purpose="edit">
+              Edit
+            </Button>
+            <Button onClick={deleteMember} purpose="delete">
+              {deleting ? 'Deleting...' : 'Delete'}
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

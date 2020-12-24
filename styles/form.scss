@@ -1,0 +1,35 @@
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  &-div {
+    box-sizing: border-box;
+    width: 90%;
+  }
+
+  &-input {
+    box-sizing: border-box;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 0.2rem;
+    outline: none;
+    background: none;
+  }
+  &-label {
+    left: 1rem;
+    top: 1rem;
+    padding: 0 0.25rem;
+    font-size: 20px;
+    transition: 0.3s;
+  }
+  &-input:focus {
+    border-bottom: 1px solid black;
+  }
+}

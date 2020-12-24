@@ -1,9 +1,7 @@
 import Head from 'next/head';
-
-import styles from '../styles/Home.module.css';
-import Form from '../components/Form';
 import List from '../components/List';
-
+import Welcome from '../components/Welcome';
+import Loading from '../components/Loading';
 import { useMember } from '../utils/swr';
 
 export default function Home() {
@@ -12,18 +10,27 @@ export default function Home() {
   console.log(member);
 
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Greenly</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <Form />
-        {isLoading ? <div>loading</div> : <List member={member} />}
+      <main>
+        <div className={`main`}>
+          <Welcome />
+          {isLoading ? <Loading /> : <List member={member} />}
+        </div>
+        <footer className="site-footer">
+          <p>
+            &copy; {new Date().getFullYear()} Greenly &bull; Crafted with{' '}
+            <span role="img" aria-label="love">
+              &#9998;
+            </span>{' '}
+            by <a href="http://zakiafada.me/">Zaki Afada</a>
+          </p>
+        </footer>
       </main>
-
-      <footer className={styles.footer}>zaki</footer>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { mutate } from 'swr';
 
-export default function Form({ data }) {
+export default function Form({ data, toggleModal }) {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
@@ -50,6 +50,7 @@ export default function Form({ data }) {
             address: address,
           }),
         });
+        toggleModal();
         const json = await res.json();
         if (!res.ok) throw Error(json.message);
       }
@@ -65,10 +66,14 @@ export default function Form({ data }) {
   }
 
   return (
-    <form onSubmit={submitHandler}>
-      <div>
-        <label htmlFor="name">Name</label>
+    <form onSubmit={submitHandler} className="form">
+      <h1>{!data ? "Let's Join" : 'Edit Member Data'}</h1>
+      <div className={data ? 'form-div' : ''}>
+        <label htmlFor="name" className="form-label">
+          Name
+        </label>
         <input
+          className="form-input"
           id="name"
           type="text"
           name="name"
@@ -77,20 +82,27 @@ export default function Form({ data }) {
           required
         />
       </div>
-      <div>
-        <label htmlFor="name">Phone</label>
+      <div className={data ? 'form-div' : ''}>
+        <label htmlFor="phone" className="form-label">
+          Phone
+        </label>
         <input
+          className="form-input"
           id="phone"
-          type="number"
+          type="tel"
+          pattern="\d*"
           name="phone"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           required
         />
       </div>
-      <div>
-        <label htmlFor="name">Address</label>
+      <div className={data ? 'form-div' : ''}>
+        <label htmlFor="address" className="form-label">
+          Address
+        </label>
         <input
+          className="form-input"
           id="address"
           type="text"
           name="address"
@@ -99,8 +111,15 @@ export default function Form({ data }) {
           required
         />
       </div>
-      <button disabled={submitting} type="submit">
-        {submitting ? 'Adding member ...' : 'Add member'}
+      <button
+        className={`button ${data ? 'edit' : 'add'}`}
+        disabled={submitting}
+        type="submit"
+        style={
+          data ? { fontSize: '20px', width: '150px', marginTop: '20px' } : {}
+        }
+      >
+        {submitting ? 'Submitting...' : 'Submit'}
       </button>
     </form>
   );

@@ -1,0 +1,36 @@
+.main {
+  min-height: 100vh;
+  padding: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.list {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 90%;
+}
+
+.cell {
+  margin: 5px;
+  flex-basis: 35%;
+  padding: 5px;
+  text-align: left;
+}
+
+.site-footer {
+  text-align: center;
+  margin: 90px 0 16px;
+  color: #666;
+  a {
+    border-bottom: 3px solid #1e4f49;
+  }
+}
+
+.loading {
+  width: 75%;
+  margin: auto;
+}
