@@ -1,13 +1,11 @@
 import Head from 'next/head';
 import List from '../components/List';
-import Welcome from '../components/Welcome';
+import Hero from '../components/Hero';
 import Loading from '../components/Loading';
 import { useMember } from '../utils/swr';
 
 export default function Home() {
   const { member, isLoading } = useMember();
-
-  console.log(member);
 
   return (
     <div>
@@ -18,7 +16,7 @@ export default function Home() {
 
       <main>
         <div className={`main`}>
-          <Welcome />
+          <Hero />
           {isLoading ? <Loading /> : <List member={member} />}
         </div>
         <footer className="site-footer">

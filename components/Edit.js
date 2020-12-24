@@ -1,5 +1,5 @@
 import { Modal } from 'react-responsive-modal';
-import Form from './Form';
+import Form from './Forms';
 
 export default function EditModal({ modalOpen, toggleModal, data }) {
   return (

@@ -1,6 +1,6 @@
-import Form from './Form';
+import Form from './Forms';
 
-export default function Welcome() {
+export default function Hero() {
   return (
     <>
       <div className="wrapper">

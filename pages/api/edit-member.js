@@ -4,7 +4,6 @@ import MemberMongodb from '../../models/MemberMongodb';
 
 const handler = async (req, res) => {
   const { id, member_id, name, phone, address } = req.body;
-  console.log(req.body);
   try {
     if (!id || !member_id || !name || !phone || !address) {
       return res.status(400).json({

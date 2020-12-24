@@ -36,7 +36,6 @@ export default function Form({ data, toggleModal }) {
         if (!res.ok) throw Error(json.message);
       } else {
         // edit member
-        console.log('edit');
         const res = await fetch('/api/edit-member', {
           method: 'PATCH',
           headers: {
