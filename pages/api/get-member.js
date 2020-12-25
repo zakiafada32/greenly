@@ -19,8 +19,8 @@ const handler = async (_, res) => {
     // merged data mysql and mongodb
     const mergedResult = resultsMysql.map((item, idx) => {
       for (let i = 0; i < resultsMongodb.length; i++) {
-        if (resultsMysql[i].member_id === resultsMongodb[i]._id.toString()) {
-          return Object.assign({}, item, resultsMongodb[idx]._doc);
+        if (item.member_id === resultsMongodb[i]._id.toString()) {
+          return Object.assign({}, item, resultsMongodb[i]._doc);
         }
       }
     });
